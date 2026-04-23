@@ -1,0 +1,6 @@
+# Báo cáo kết quả Lab 16 (Phương án CPU Instance)
+
+- **Lý do sử dụng CPU thay GPU:** Do tài khoản GCP mới bị khóa hạn mức GPU ở mức 0 và việc yêu cầu tăng quota mất rất nhiều thời gian chờ đợi. Để hoàn thành Lab, tôi đã chuyển sang sử dụng CPU Instance cao cấp (`n2-standard-8` với 8 vCPU) thay vì dùng mô hình LLM trên GPU. Phương án này tiết kiệm chi phí tương đương nhưng vẫn đáp ứng rất tốt sức mạnh cần thiết cho việc xử lý dữ liệu bảng với Machine Learning.
+- **Tốc độ Huấn luyện (Training Time):** Mô hình LightGBM đã nạp dữ liệu rất nhanh (1.86 giây) và hoàn thành việc huấn luyện tập dữ liệu cực lớn (hơn 280,000 giao dịch) chỉ trong **5.17 giây**. Điều này chứng minh CPU `n2-standard-8` xử lý tính toán song song cực kỳ mạnh mẽ.
+- **Độ chính xác (Accuracy & AUC-ROC):** Mô hình đạt độ chính xác tổng thể vô cùng cao **99.65%**, với chỉ số AUC-ROC là **0.869**, cho thấy thuật toán nhận diện gian lận hoạt động rất tốt trên tập dữ liệu mất cân bằng.
+- **Tốc độ Suy luận (Inference Speed):** Tốc độ phản hồi của mô hình đặc biệt ấn tượng: chỉ mất **0.79 ms** để dự đoán 1 dòng dữ liệu đơn lẻ và **5.6 ms** cho 1000 dòng. Các chỉ số này hoàn toàn lý tưởng để tích hợp vào các hệ thống phát hiện gian lận thời gian thực (Real-time Fraud Detection).
